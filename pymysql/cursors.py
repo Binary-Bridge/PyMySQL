@@ -29,7 +29,10 @@ class Cursor:
     #:
     #: Max size of allowed statement is max_allowed_packet - packet_header_size.
     #: Default value of max_allowed_packet is 1048576.
-    max_stmt_length = 1024000
+    # max_stmt_length = 1024000
+
+    # TECH-1646: Increase max_stmt_length based on max packet size 64MB
+    max_stmt_length = 64 * 1024 * 1024 - (1048576 - 1024000)
 
     def __init__(self, connection):
         self.connection = connection
